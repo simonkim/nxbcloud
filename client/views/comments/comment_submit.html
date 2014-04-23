@@ -2,13 +2,21 @@
   <form name="comment" class="comment-form">
     <div class="control-group">
         <div class="controls">
-            <label for="body">Comment on this post</label>
-            <textarea name="body"></textarea>
+            <label for="url">URL</label>
+            <input type="text" cols=80 name="url"/>
+        </div>
+        <div class="controls">
+            <label for="label">Label</label>
+            <input type="text" name="label"/>
+        </div>
+        <div class="controls">
+          <label for="body">Description (optional)</label>
+          <textarea name="body"></textarea>
         </div>
     </div>
     <div class="control-group">
         <div class="controls">
-            <button type="submit" class="btn">Add Comment</button>
+            <button type="submit" class="btn">Add Link</button>
         </div>
     </div>
   </form>

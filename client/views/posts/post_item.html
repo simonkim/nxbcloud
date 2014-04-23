@@ -2,14 +2,22 @@
   <div class="post" {{attributes}}>
     <a href="#" class="upvote btn {{upvotedClass}}">⬆</a>
     <div class="post-content">
-      <h3><a href="{{url}}">{{title}}</a><span>{{domain}}</span></h3>
+      <h3>{{title}}</h3>
       <p>
         {{pluralize votes "Vote"}},
         submitted by {{author}},
-        <a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "comment"}}</a>
+        <a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "link"}}</a>
         {{#if ownPost}}<a href="{{pathFor 'postEdit'}}">Edit</a>{{/if}}
       </p>
+      {{#if url}}
+        <p><a href="{{url}}">{{domain}}</a></p>
+      {{/if}}
+      {{#if message}}
+        <blockquote>
+        {{message}}
+        </blockquote>
+      {{/if}}
     </div>
-    <a href="{{pathFor 'postPage'}}" class="discuss btn">Discuss</a>
+    <a href="{{pathFor 'postPage'}}" class="discuss btn">Open</a>
   </div>
 </template>

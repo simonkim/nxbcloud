@@ -11,3 +11,9 @@ spin
 accounts-ui-bootstrap-dropdown
 accounts-password
 iron-router-progress
+collection-api
+http-publish
+reststop2
+collectionFS
+cfs-filesystem
+ui-dropped-event

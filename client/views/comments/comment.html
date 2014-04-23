@@ -1,9 +1,11 @@
 <template name="comment">
   <li>
     <h4>
-      <span class="author">{{author}}</span>
-      <span class="date">on {{submittedText}}</span>
+      <span class="url"> <a href="{{url}}">{{url}}</a></span>
+      <span class="label">{{label}}</span>
+      <button class="btn pull-right">Edit</button>
     </h4>
+    {{domain}}
     <p>{{body}}</p>
   </li>
 </template>

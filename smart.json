@@ -3,6 +3,11 @@
     "iron-router": {},
     "spin": {},
     "accounts-ui-bootstrap-dropdown": {},
-    "iron-router-progress": {}
+    "iron-router-progress": {},
+    "collection-api": {},
+    "http-publish": {},
+    "reststop2": {},
+    "collectionFS": {},
+    "ui-dropped-event": {}
   }
 }
