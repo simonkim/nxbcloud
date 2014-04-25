@@ -2,6 +2,7 @@
 Stream Link Directory with the following features
 - Manage multimedia stream link URLs in master/detail structure
 - JSON API for client sync.
+- Drag and drop upload for adding multiple links easy
 
 ## Link URL management
   - Manage all the links at the centeral place: NXBCloud web site
@@ -18,6 +19,26 @@ Stream Link Directory with the following features
   - File 2
     - line 1
     - ...
+
+## Drag and drop upload
+From a computer desktop GUI file system browser such as Mac Finder or Windows Explorer, drag one or multiple text files to the 'Drop zone' of the web site and new File and links will be added.
+- Name of the uploaded file will become the title of 'File' entry in the web site.
+- Format of the text file
+<pre>
+<link> <label>
+</pre>
+
+- Example of a text file with links, file name 'mysite.txt'
+<pre>
+http://mysite.com/path sample site link
+</pre>
+would create a 'File' entry with title 'mysite.txt' with the following new 'link' entry to the 'mylist.txt' File entry
+- link: <code>http://mysite.com/path</code>
+- label: <code>sample site link'</code>
+
+## JSON API link
+- 'File' entries: <code>/api/nxb</code>
+- 'Link' entries for a 'File' entry: <code>/api/links/&lt;file_entry_id&gt;</code>
 
 # Install
 1. Install  [meteor link](https://www.meteor.com)
