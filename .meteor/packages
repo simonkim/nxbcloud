@@ -5,7 +5,6 @@
 
 insecure
 standard-app-packages
-bootstrap
 iron-router
 spin
 accounts-ui-bootstrap-dropdown
@@ -17,3 +16,4 @@ reststop2
 collectionFS
 cfs-filesystem
 ui-dropped-event
+bootstrap

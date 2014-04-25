@@ -9,5 +9,7 @@
     {{/if}}
   </div>
 
-  {{> uploadnxb}}
+  {{#if currentUser}}
+    {{> uploadnxb}}
+  {{/if}}
 </template>

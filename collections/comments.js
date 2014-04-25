@@ -1,6 +1,27 @@
 
 Comments = new Meteor.Collection('comments');
 
+Comments.allow({
+  update: function(userId, comment, fieldNames) {
+    return Meteor.user() && Meteor.userId() == userId;
+  },
+  remove: function(userId, comment, fieldNames) {
+    return Meteor.user() && Meteor.userId() == userId;
+  }
+});
+
+Comments.deny({
+  update: function(userId, comment, fieldNames) {
+    // may only edit the following 3 fields:
+    return (_.without(fieldNames, 'label', 'url', 'body').length > 0);
+  },
+  remove: function(userId, comment, fieldNames) {
+    console.log( 'Comments.deny.remove: userId:' + userId);
+    Posts.update(comment.postId, {$inc: {commentsCount: -1}});
+    return false;
+  }
+});
+
 Meteor.methods({
   comment: function(commentAttributes) {
     var user = Meteor.user();

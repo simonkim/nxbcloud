@@ -1,11 +1,45 @@
 <template name="comment">
   <li>
-    <h4>
-      <span class="url"> <a href="{{url}}">{{url}}</a></span>
-      <span class="label">{{label}}</span>
-      <button class="btn pull-right">Edit</button>
-    </h4>
-    {{domain}}
+      {{#if editing}}
+        {{> comment_edit}}
+      {{else}}
+        {{> comment_view}}
+      {{/if}}
     <p>{{body}}</p>
   </li>
+</template>
+
+<template name="comment_edit">
+  <form name="comment" class="comment-form">
+    <span for="label">Label</span>
+    <input type="text" name="label" value="{{label}}"/>
+    <span for="url">URL</span>
+    <input type="text" name="url" value="{{url}}"/>
+    <label for="body">Description (optional)</label>
+    <textarea name="body">{{body}}</textarea>
+
+    <button class="btn btn-mini btn-danger cancel">Cancel</button>
+    <button class="btn btn-mini done" type="submit">Done</button>
+  </form>
+</template>
+
+<template name="comment_view">
+    <h4>
+      <span class="label"><i class="icon-tag"></i>{{displayLabel}}</span>
+      <span class="url"> <a href="{{url}}">{{url}}</a></span>
+    </h4>
+    <div>
+      {{#if extraParams}}
+
+      <span class="badge badge-info"><i class="icon-lock"></i>{{extServer}}</span>
+
+      <span class="badge badge-info"><i class="icon-home"></i>{{extCompany}}</span>
+      {{/if}}
+      <span class="badge"><i class="icon-globe"></i>{{domain}}</span>
+    </div>
+
+  {{#if currentUser}}
+    <button class="btn btn-mini btn-danger delete">Delete</button>
+    <button class="btn btn-mini edit">Edit</button>
+  {{/if}}
 </template>
