@@ -25,7 +25,7 @@ From a computer desktop GUI file system browser such as Mac Finder or Windows Ex
 - Name of the uploaded file will become the title of 'File' entry in the web site.
 - Format of the text file
 <pre>
-<link> <label>
+&lt;link&gt; &lt;label&gt;
 </pre>
 
 - Example of a text file with links, file name 'mysite.txt'
@@ -33,21 +33,21 @@ From a computer desktop GUI file system browser such as Mac Finder or Windows Ex
 http://mysite.com/path sample site link
 </pre>
 would create a 'File' entry with title 'mysite.txt' with the following new 'link' entry to the 'mylist.txt' File entry
-- link: <code>http://mysite.com/path</code>
-- label: <code>sample site link'</code>
+  - link: <code>http://mysite.com/path</code>
+  - label: <code>sample site link'</code>
 
 ## JSON API link
 - 'File' entries: <code>/api/nxb</code>
 - 'Link' entries for a 'File' entry: <code>/api/links/&lt;file_entry_id&gt;</code>
 
 # Install
-1. Install  [meteor link](https://www.meteor.com)
+1. Install  [meteor](https://www.meteor.com)
 <pre>
 $ curl https://install.meteor.com/ | sh
 </pre>
   - Requires 'curl' command line tool
 
-2. Install [meteorite link](https://github.com/oortcloud/meteorite/)
+2. Install [meteorite](https://github.com/oortcloud/meteorite/)
 <pre>
 $ sudo npm install -g meteorite
 </pre>
@@ -67,4 +67,4 @@ $ mrt update
 <pre>
 $ meteor
 </pre>
-  - And connect to [http://localhost:3000 link](http://localhost:3000) using a web browser
+  - And connect to [http://localhost:3000](http://localhost:3000) using a web browser
