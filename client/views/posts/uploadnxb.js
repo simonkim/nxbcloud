@@ -13,6 +13,16 @@ var addComment = function(comment) {
   }
 };
 
+var stripExtension = function(name, exts) {
+  for( var i = 0; i < exts.length; i++ ) {
+    var idx = name.indexOf('.' + exts[i]);
+    while ( idx != -1 && idx != 0 ) {
+        name = name.substring(0, idx);
+        idx = name.indexOf(exts[i]);
+    }
+  }
+  return name;
+};
 var handleNxbFile = function(file) {
   /* read, extract each line, add as link */
 
@@ -22,15 +32,21 @@ var handleNxbFile = function(file) {
   var name = file.name;
   var type = file.type;
 
+  name = stripExtension( name, ['nxb', 'txt']);
   console.log( 'file: name:' + name);
 
   var addLinksFromLines = function(nxbId, lines) {
     lines.forEach(function(line) {
       var cols = line.split(' ');
-      if ( cols.length > 1) {
+      if ( cols.length > 0) {
         var url = cols[0];
-        cols.shift();
-        var label = cols.join(' ');
+        var label = '';
+
+        if ( cols.length > 1) {
+          cols.shift();
+          label = cols.join(' ');
+        }
+
         addComment({postId: nxbId, url:url, label:label});
       }
     });
