@@ -4,10 +4,9 @@
     "spin": {},
     "accounts-ui-bootstrap-dropdown": {},
     "iron-router-progress": {},
-    "collection-api": {},
     "http-publish": {},
     "reststop2": {},
-    "collectionFS": {},
-    "ui-dropped-event": {}
+    "ui-dropped-event": {},
+    "collection-api": {}
   }
 }

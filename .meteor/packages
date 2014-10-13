@@ -5,15 +5,13 @@
 
 insecure
 standard-app-packages
-iron-router
 spin
 accounts-ui-bootstrap-dropdown
 accounts-password
-iron-router-progress
-collection-api
 http-publish
 reststop2
-collectionFS
-cfs-filesystem
 ui-dropped-event
 bootstrap
+cfs:standard-packages
+cfs:filesystem
+iron:router

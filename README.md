@@ -62,7 +62,11 @@ $ git clone https://github.com/simonkim/nxbcloud.git
 $ cd nxbcloud
 $ mrt update
 </pre>
-
+<pre>
+$ mrt --version
+Meteorite version 0.7.8
+Meteor 0.9.3.1
+</pre>
 # Run
 <pre>
 $ meteor
