@@ -5,13 +5,13 @@
 
 insecure
 standard-app-packages
-spin
-accounts-ui-bootstrap-dropdown
+mrt:accounts-ui-bootstrap-dropdown@0.8.3
 accounts-password
-http-publish
-reststop2
-ui-dropped-event
+raix:http-publish@0.0.10
+hellogerard:reststop2@0.6.0
+raix:ui-dropped-event@0.0.7
 bootstrap
 cfs:standard-packages
 cfs:filesystem
 iron:router
+sacha:spin
