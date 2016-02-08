@@ -5,9 +5,7 @@
 
 insecure
 standard-app-packages
-mrt:accounts-ui-bootstrap-dropdown@0.8.3
 accounts-password
-raix:http-publish@0.0.10
 hellogerard:reststop2@0.6.0
 raix:ui-dropped-event@0.0.7
 bootstrap
@@ -15,3 +13,6 @@ cfs:standard-packages
 cfs:filesystem
 iron:router
 sacha:spin
+standard-minifiers
+accounts-ui
+cfs:http-publish
