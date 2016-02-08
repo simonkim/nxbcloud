@@ -1,3 +1,19 @@
+/* Collection List */
+Template.postsList.helpers({
+    postsWithRank: function() {
+        var posts = [];
+        if ( this.posts ) {
+            this.posts.rewind();
+            posts = this.posts.map(function(post, index, cursor) {
+                post._rank = index;
+                return post;
+            });
+        }
+        return posts;
+    }
+});
+
+/* Collection Summary */
 var POST_HEIGHT = 80;
 var Positions = new Meteor.Collection(null);
 

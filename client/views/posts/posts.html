@@ -1,0 +1,45 @@
+<!-- Collection List -->
+<template name="postsList">
+  <div class="posts">
+    {{#each postsWithRank}}
+      {{> postItem}}
+    {{/each}}
+
+    {{#if nextPath}}
+      <a class="load-more" href="{{nextPath}}">Load more</a>
+    {{/if}}
+  </div>
+
+  {{#if currentUser}}
+    {{> uploadnxb}}
+  {{/if}}
+</template>
+
+<!-- Collection Summary -->
+<template name="postItem">
+  <div class="post" {{attributes}}>
+    <a href="#" class="upvote btn {{upvotedClass}}">⬆</a>
+    <div class="post-content">
+      <h3> <a href="{{pathFor 'postPage'}}">{{title}}</a> </h3>
+      <p>
+        <a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "link"}}</a>
+        <a href="#" class="btn btn-xs" > duplicate </a>
+      </p>
+
+      {{#if url}}
+        <p><a href="{{url}}">{{domain}}</a></p>
+      {{/if}}
+      {{#if message}}
+        <blockquote>
+        {{message}}
+        </blockquote>
+      {{/if}}
+
+      <p>
+        {{pluralize votes "Vote"}},
+        submitted by {{author}}
+      </p>      
+    </div>
+    {{#if ownPost}}<a href="{{pathFor 'postEdit'}}" class="discuss btn">Edit</a>{{/if}}
+  </div>
+</template>
