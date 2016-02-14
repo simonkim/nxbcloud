@@ -7,6 +7,23 @@
             <input name="title" type="text" value="{{title}}" placeholder="Name your post"/>
         </div>
     </div>
+
+    <!-- Modal: Confirm Merge -->
+    <div id="modal-confirm-merge" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="modal-confirm-merge-label" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="modal-title">Existing collection with same title</h3>
+      </div>
+      <div class="modal-body">
+        <p>Merge to the existing collection and delete this collection?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal" aria-hidden="true">Cancel</a>
+        <a href="#" class="btn btn-primary btn-merge">Merge</a>
+      </div>
+      <input name="mergeto" type="hidden" value=""/>
+    </div>    
+
     <div class="control-group">
         <label class="control-label" for="message">Description (optional)</label>
         <div class="controls">
@@ -33,3 +50,4 @@
     </div>
   </form>
 </template>
+

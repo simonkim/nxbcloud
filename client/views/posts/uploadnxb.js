@@ -1,17 +1,3 @@
-var addComment = function(comment) {
-  // postId, label, url, [body]
-  Meteor.subscribe('comments');
-
-  var found = Comments.find({postId:comment.postId, url:comment.url}).fetch();
-  if (found.length == 0) {
-    console.log( 'adding comment:' + JSON.stringify(comment));
-    Meteor.call('comment', comment, function(error, commentId) {
-      if (error){
-        throwError(error.reason);
-      }
-    });
-  }
-};
 
 var stripExtension = function(name, exts) {
   for( var i = 0; i < exts.length; i++ ) {
@@ -23,6 +9,7 @@ var stripExtension = function(name, exts) {
   }
   return name;
 };
+
 var handleNxbFile = function(file) {
   /* read, extract each line, add as link */
 
@@ -47,7 +34,7 @@ var handleNxbFile = function(file) {
           label = cols.join(' ');
         }
 
-        addComment({postId: nxbId, url:url, label:label});
+        DataAPI.addComment({postId: nxbId, url:url, label:label});
       }
     });
   };
@@ -95,7 +82,7 @@ var handleNxbFile = function(file) {
 Template.uploadnxb.events({
 
   'change .uploadnxb': function(event, template) {
-    console.log('files changed for upload');
+    console.log('uploadnxb: files changed for upload');
     FS.Utility.eachFile(event, function(file) {
       handleNxbFile(file);
       /*

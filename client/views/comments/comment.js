@@ -69,10 +69,45 @@ Template.comment_view.helpers({
       }
     }
     return label;
+  },
+  checked: function() {
+    var selectedComments = Session.get("selectedComments");
+    var index = -1;
+    if ( selectedComments ) {
+      index = selectedComments.indexOf(this._id);
+    }
+    return index != -1;
   }
-
 });
 
+Template.comment_view.events({
+  'change [type=checkbox]': function(event) {
+
+    var checked = $(event.target).is(':checked');
+    console.log('checked:' + checked + ' _id:' + this._id);
+    var selectedComments = Session.get("selectedComments");
+    if ( !selectedComments ) {
+      selectedComments = [];
+    }
+
+    var index = selectedComments.indexOf(this._id);
+    if ( checked ) {
+      if ( index == -1 ) {
+        selectedComments.push(this._id);
+      }
+    } else {
+      if ( index != -1 ) {
+        selectedComments.splice(index, 1);
+      }
+    }
+    Session.set("selectedComments", selectedComments);
+
+    console.log('selectedComments:' + selectedComments);
+
+    //Todos.update(this._id, {$set: {checked: checked}});
+    //Lists.update(this.listId, {$inc: {incompleteCount: checked ? -1 : 1}});
+  }
+});
 Template.comment_edit.events({
 
     "submit form": function(e) {

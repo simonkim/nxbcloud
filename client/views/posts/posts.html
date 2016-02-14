@@ -23,7 +23,7 @@
       <h3> <a href="{{pathFor 'postPage'}}">{{title}}</a> </h3>
       <p>
         <a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "link"}}</a>
-        <a href="#" class="btn btn-xs" > duplicate </a>
+        <a href="#" class="btn btn-small duplicate" > duplicate </a>
       </p>
 
       {{#if url}}
@@ -42,4 +42,29 @@
     </div>
     {{#if ownPost}}<a href="{{pathFor 'postEdit'}}" class="discuss btn">Edit</a>{{/if}}
   </div>
+</template>
+
+
+<!-- Collection Detail View -->
+<template name="postPage">
+  {{> postItem}}
+
+  <div class="btn-group">
+    {{#if hasSelectedLinks}}
+    <button class="btn btn-mini btn-warning" >Check All</button>
+    <button class="btn btn-mini btn-danger">Move</button>
+    {{/if}}
+  </div>
+
+  <ul class="comments">
+    {{#each comments}}
+      {{> comment}}
+    {{/each}}
+  </ul>
+  
+  {{#if currentUser}}
+    {{> commentSubmit}}
+  {{else}}
+    <p>Please log in to leave a comment.</p>
+  {{/if}}
 </template>

@@ -1,4 +1,7 @@
 /* Collection List */
+
+// Templates
+
 Template.postsList.helpers({
     postsWithRank: function() {
         var posts = [];
@@ -60,5 +63,61 @@ Template.postItem.events({
   'click .upvotable': function(e) {
     e.preventDefault();
     Meteor.call('upvote', this._id);
+  },
+
+  'click .duplicate': function(e) {
+    e.preventDefault();
+    //Meteor.call('upvote', this._id);
+    console.log('duplicate:' + this.title + '(' + this._id + ')');
+
+    var srcCollection = this;
+
+    Meteor.subscribe('comments', srcCollection._id, function() {
+      // onReady()
+      var comments = DataAPI.findComments(srcCollection._id).fetch();
+      if ( comments.length > 0 ) {
+        var newTitleBase = srcCollection.title + ' dup';
+        var newTitle = newTitleBase;
+        var i = 1;
+        while (true) {
+          var collection = Posts.findOne({title:newTitle});
+          if ( !collection ) {
+            break;
+          }
+          newTitle = newTitleBase + i++;
+        }
+        console.log( '1. Adding collection with title:' + newTitle);
+
+        var collection = _.extend(_.pick(srcCollection, 'url', 'message'), {
+          title: newTitle
+        } );
+
+        Meteor.call('post', collection, function(error, id) {
+          if (error) {
+            // display the error to the user
+            throwError(error.reason);
+
+          } else {
+            console.log( '2. Adding links to new collection:' + id);
+            Meteor.subscribe('singlePost', id, function() {
+              for( i = 0; i < comments.length; i++) {
+                console.log('3. comment[' + i + ']:' + comments[i].label);
+                comments[i].postId = id;
+                DataAPI.addComment(comments[i]);
+              }
+              Router.go('postPage', {_id: id});
+            });
+          }
+        });
+      }      
+    });
+  }
+});
+
+
+/* Collection Detail View */
+Template.postPage.helpers({
+  comments: function() {
+    return DataAPI.findComments(this._id);
   }
 });
