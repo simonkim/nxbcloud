@@ -16,3 +16,4 @@ sacha:spin
 standard-minifiers
 accounts-ui
 cfs:http-publish
+reactive-var

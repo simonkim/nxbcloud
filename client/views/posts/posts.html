@@ -18,9 +18,23 @@
 <!-- Collection Summary -->
 <template name="postItem">
   <div class="post" {{attributes}}>
-    <a href="#" class="upvote btn {{upvotedClass}}">⬆</a>
+    <!--a href="#" class="upvote btn {{upvotedClass}}">⬆</a-->
     <div class="post-content">
-      <h3> <a href="{{pathFor 'postPage'}}">{{title}}</a> </h3>
+      {{#if editingTitle}}
+        <input type="text" name="edit-title" class="input-edit-title" value="{{title}}"/>
+      {{else}}
+      <h3> <a href="{{pathFor 'postPage'}}">{{title}}</a> 
+          <a href="#" class="btn btn-mini edit-title"><i class="icon-edit"></i> </a> 
+      </h3>
+      {{/if}}
+
+      {{#if showAlertMergeConfirm}}
+      <div class="alert alert-info alert-merge">
+        Merge into collection with the title?
+        <a href="#" class="btn btn-primary btn-mini merge-confirm" > Merge </a>
+      </div>
+      {{/if}}
+
       <p>
         <a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "link"}}</a>
       </p>
@@ -35,11 +49,13 @@
       {{/if}}
 
       <p>
-        {{pluralize votes "Vote"}},
-        submitted by {{author}}
+        by {{author}}
       </p>     
-        <a href="#" class="btn btn-mini duplicate" > duplicate </a>
+        {{#if ownPost}}
+          <a href="{{pathFor 'postEdit'}}" class="btn btn-mini">Edit</a>
+        {{/if}}
         <a href="#" class="btn btn-mini btn-danger delete" > delete </a>       
+        <a href="#" class="btn btn-mini duplicate" > duplicate </a>
     </div>
     {{#if ownPost}}<a href="{{pathFor 'postEdit'}}" class="discuss btn">Edit</a>{{/if}}
   </div>
@@ -57,15 +73,16 @@
     {{/if}}
   </div>
 
+  {{#if currentUser}}
+    {{> commentSubmit}}
+  {{else}}
+    <p>Please log in to leave a comment.</p>
+  {{/if}}
+
   <ul class="comments">
     {{#each comments}}
       {{> comment}}
     {{/each}}
   </ul>
   
-  {{#if currentUser}}
-    {{> commentSubmit}}
-  {{else}}
-    <p>Please log in to leave a comment.</p>
-  {{/if}}
 </template>

@@ -59,10 +59,72 @@ Template.postItem.helpers({
   }
 });
 
+Template.postItem.onCreated( function() {
+  this.mergeTarget = new ReactiveVar(null);
+  this.editingTitle = new ReactiveVar(false);
+});
+
+Template.postItem.helpers( {
+  editingTitle: function() {
+    return Template.instance().editingTitle.get();
+  },
+
+  showAlertMergeConfirm: function() {
+    console.log('showAlertMergeConfirm:' + Template.instance().mergeTarget.get());
+    return Template.instance().mergeTarget.get() !== null;
+  }
+});
+
+var changeCollectionTitle = function(id, title, callback) {
+    var changes = {
+      title: title,
+    }
+    Meteor.call('updateCollection', id, changes, callback);
+};
+
 Template.postItem.events({
-  'click .upvotable': function(e) {
-    e.preventDefault();
-    Meteor.call('upvote', this._id);
+  'click .edit-title': function(e, template) {
+    template.editingTitle.set(true);
+
+    Deps.flush();
+    var input = template.find('.input-edit-title');
+    input.focus();
+    input.select();
+  },
+
+  'click .merge-confirm': function(e, template) {
+    var srcId = this._id;
+    var dstId = template.mergeTarget.get();
+
+    Meteor.call('moveLinks', srcId, dstId, function(error, id) {
+      if ( error ) {
+        throwError(error.reason);
+      } else {
+        DataAPI.deleteCollection(srcId);
+        Router.go('postPage', {_id: dstId});
+      }
+    });
+
+  },
+
+  'focusout .input-edit-title': function(e, template) {
+    var title = $(e.target).val();
+    if ( title && title.length > 0 ) {
+      changeCollectionTitle(this._id, title, function(error, result) {
+        var mergeTarget = null;
+        if (error) {
+            // display the error to the user
+            throwError(error.reason);
+        } else {
+          if ( result.updated ) {
+            template.editingTitle.set(false);
+          } else if ( result.conflictCollectionId ) {
+            mergeTarget = result.conflictCollectionId;
+          }
+        }
+        template.mergeTarget.set(mergeTarget);
+      });
+    }
   },
 
   'click .delete': function(e) {
