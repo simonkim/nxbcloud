@@ -23,7 +23,6 @@
       <h3> <a href="{{pathFor 'postPage'}}">{{title}}</a> </h3>
       <p>
         <a href="{{pathFor 'postPage'}}">{{pluralize commentsCount "link"}}</a>
-        <a href="#" class="btn btn-small duplicate" > duplicate </a>
       </p>
 
       {{#if url}}
@@ -38,7 +37,9 @@
       <p>
         {{pluralize votes "Vote"}},
         submitted by {{author}}
-      </p>      
+      </p>     
+        <a href="#" class="btn btn-mini duplicate" > duplicate </a>
+        <a href="#" class="btn btn-mini btn-danger delete" > delete </a>       
     </div>
     {{#if ownPost}}<a href="{{pathFor 'postEdit'}}" class="discuss btn">Edit</a>{{/if}}
   </div>

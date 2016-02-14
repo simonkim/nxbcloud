@@ -65,6 +65,15 @@ Template.postItem.events({
     Meteor.call('upvote', this._id);
   },
 
+  'click .delete': function(e) {
+    e.preventDefault();
+
+    if (confirm("Delete collection '" + this.title + "' ?")) {
+      Posts.remove(this._id);
+      Router.go('home');
+    }
+  },
+
   'click .duplicate': function(e) {
     e.preventDefault();
     //Meteor.call('upvote', this._id);
@@ -116,6 +125,7 @@ Template.postItem.events({
 
 
 /* Collection Detail View */
+
 Template.postPage.helpers({
   comments: function() {
     return DataAPI.findComments(this._id);
